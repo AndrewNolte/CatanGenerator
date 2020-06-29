@@ -27,7 +27,7 @@ def getBoard(_):
 
 def main():
 
-
+	st.title('Catan Board Tool')
 	#####################################
 	############ Sidebar inputs
 	#####################################
