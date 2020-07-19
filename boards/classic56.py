@@ -16,5 +16,5 @@ class Classic56(CatanBoard):
 								  [0,0,1,1,1,1,0,0,0],\
 								 [0,0,0,1,1,1,0,0,0],\
 							      [0,0,0,0,0,0,0,0,0] ])
-		self.resCounts = Counter({i:j for i,j in enumerate([0, 2, 5, 6, 6, 6, 5, 0])})
+		self.resCounts = Counter({i:j for i,j in enumerate([0, 0, 2, 5, 6, 6, 6, 5, 0])})
 		self.numCounts = Counter({i:j for i,j in enumerate([0,0,2,3,3,3,3,0,3,3,3,3,2])})

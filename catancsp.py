@@ -54,7 +54,7 @@ class CatanBoard:
 			# push everything onto priority queue
 			for x in range(m):
 				for y in range(n):
-					if self.board[x,y] == 1:
+					if self.board[x,y] == tileToId['unknown']:
 						pq.push((x,y), len(constraints[x][y]))
 
 			# get the tile with the least number of possibilites
@@ -124,7 +124,7 @@ class CatanBoard:
 
 		# constraints inherently imposed by desert
 		if spread212:
-			di, dj = np.where(res == tiles.index('desert'))
+			di, dj = np.where(res == tileToId['desert'])
 
 			for dx, dy in zip(list(di), list(dj)):
 				for i,j in getValidNeighbors(self.board, dx, dy):
@@ -134,7 +134,7 @@ class CatanBoard:
 		# get the tile with the least number of possibilites
 		while pq.hasStuff():
 			(x,y), constraintLen = pq.pop()
-			if nums[x,y] > 0 or res[x,y] == 1:
+			if nums[x,y] > 0 or res[x,y] == tileToId['desert']:
 				continue
 
 			
@@ -193,7 +193,7 @@ class CatanBoard:
 		# st.write(board.shape)
 		for x in range(m):
 			for y in range(n):
-				if res[x][y] > 1:
+				if res[x][y] > tileToId['desert']:
 					nums[x,y] = sample(smp)
 					smp[nums[x,y]] -= 1
 		return nums
@@ -203,13 +203,13 @@ class CatanBoard:
 		pass
 
 	def verify(self):
-		spots = np.sum(self.board)
+		spots = np.sum(self.board == tileToId['unknown'])
 		res = True
 
 		if sum(list(self.resCounts.values())) != spots:
 			print('res counts does\'t add to spots available')
 			res = False
-		if sum(list(self.numCounts.values())) != spots-self.resCounts[1]:
+		if sum(list(self.numCounts.values())) != spots-self.resCounts[tileToId['desert']]:
 			print('num counts does\'t add to spots available')
 			res = False
 		if self.numCounts[0] or self.numCounts[1] or self.numCounts[7]:

@@ -4,9 +4,9 @@ from heapq import heappush, heappop
 import random
 numToDot = [0,0,1,2,3,4,5,6,5,4,3,2,1]
 # universal vars
-tiles = ['ocean', 'desert', 'brick', 'wood', 'sheep', 'wheat', 'ore', 'gold']
-colors = ['blue', 'tan', 'firebrick', 'darkgreen', 'lawngreen', 'gold', 'slategrey', 'darkkhaki']
-
+tiles = ['ocean', 'unknown', 'desert', 'brick', 'wood', 'sheep', 'wheat', 'ore', 'gold']
+colors = ['blue', 'black', 'tan', 'firebrick', 'darkgreen', 'lawngreen', 'gold', 'slategrey', 'darkkhaki']
+tileToId = {tile:i for i,tile in enumerate(tiles)}
 # if at first you fail, try, try, try again
 def iafyf(func):
 
