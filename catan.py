@@ -17,9 +17,7 @@ from drawing import plotBoard
 
 
 
-@st.cache(allow_output_mutation=True)
-def getDice(_):
-	return list(), [0 for i in range(13)]
+
 
 @st.cache(allow_output_mutation=True)
 def getBoard(_):
@@ -27,7 +25,7 @@ def getBoard(_):
 
 def main():
 
-	st.title('Catan Board Tool')
+	st.title('Catan Board Generator')
 	#####################################
 	############ Sidebar inputs
 	#####################################
@@ -59,40 +57,7 @@ def main():
 		st.error('Error in board verification')
 		return
 
-	#####################################
-	############ Dice Stuff
-	#####################################
 
-	prev, stats = getDice(0)
-
-
-	# buttons
-	if st.button('Clear Dice'):
-		while prev:
-			prev.pop()
-		for i in range(13):
-			stats[i] = 0
-
-	if st.button('Roll Dice'):
-		da = random.randint(1,6)
-		db = random.randint(1,6)
-
-		st.markdown(f'## {da} + {db} = {da+db}')
-		prev.append(da+db)
-		stats[da+db] += 1
-
-	# plot history
-	if len(prev) > 4:
-		for num in prev[-4::][::-1]:
-			st.write(num)
-	else:
-		for num in prev[::-1]:
-			st.write(num)
-
-	# plot stats
-	st.header('Dice Statistics')
-	fig = go.Figure(data=[go.Bar(x=list(range(2,13)), y=stats[2:])])
-	st.plotly_chart(fig)
 
 	#####################################
 	############ Map gen
@@ -118,14 +83,33 @@ def main():
 		spotprod = getPositionCounts(res, nums)
 
 		st.header('Board Productions')
-		fig = go.Figure(data=[go.Bar(x=tiles[2:-1], y=prod[2:-1])])
+		fig = go.Figure(data=[go.Bar(x=tiles[3:-1], y=prod[3:-1])])
+		fig.update_layout(
+    # xaxis = dict(
+    #     tickangle = 90,
+    #     title_text = "Month",
+    #     title_font = {"size": 20},
+    #     title_standoff = 25),
+    yaxis = dict(
+        title_text = "# of spots",
+        title_standoff = 25))
 		st.plotly_chart(fig) 
 
+		
 		st.header('Spot Productions')
 		fig = go.Figure(data=[go.Bar(x=list(range(1,20)), y=spotprod)])
+
+		fig.update_layout(
+    xaxis = dict(
+        title_text = "dot count",
+        title_font = {"size": 20},
+        title_standoff = 25),
+    yaxis = dict(
+        title_text = "# of spots with dot count",
+        title_standoff = 25))
 		st.plotly_chart(fig) 
 
-	st.markdown('[Feedback/Bugs](https://forms.gle/J9ZubAui3LFbaNN47)')
+	# st.markdown('[Feedback/Bugs](https://forms.gle/J9ZubAui3LFbaNN47)')
 
 	# print out globals for debugging
 
