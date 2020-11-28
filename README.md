@@ -1,4 +1,4 @@
-# Catan Board Generator
+# Catan Board Generator [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/andrewnolte/catangenerator/master/catan.py/+/)
 
 ## catan.py
 
